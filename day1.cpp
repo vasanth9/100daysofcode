@@ -9,6 +9,7 @@ git add filename
 git status
 git commit -m 'message'
 git push
+git log
 */
 
 
