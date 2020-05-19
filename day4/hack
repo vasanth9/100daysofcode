@@ -1,0 +1,62 @@
+//SOCK MERCHENT
+int sockMerchant(int n, vector<int> ar) {
+int x=0;
+int arr[101]={0};
+for(int y:ar)
+{
+    arr[y]++;
+}
+for(int i=0;i<101;i++)
+{
+    x=x+(arr[i]/2);
+}
+cout<<x;
+return x;
+}
+//
+DoublyLinkedListNode* reverse(DoublyLinkedListNode* head) {
+    DoublyLinkedListNode *f=head;
+   DoublyLinkedListNode *t=NULL;
+   while(f!=NULL)
+   {
+       t=f->prev;
+       f->prev=f->next;
+       f->next=t;
+       f=f->prev;
+
+   }
+   if(t!=NULL)
+   {
+       head=t->prev;
+   }
+
+return head;
+}
+//
+DoublyLinkedListNode* sortedInsert(DoublyLinkedListNode* head, int data) {
+
+DoublyLinkedListNode *n=head;
+while(n->next!=NULL&&n->data<data)
+n=n->next;
+DoublyLinkedListNode *o=new DoublyLinkedListNode(data);
+if(n==head)
+{
+    head->prev=o;
+    o->next=head;
+    head=o;return head;
+}
+if(n->data<data)
+{cout<<n->data;
+    n->next=o;
+    o->prev=n;
+}
+else
+{
+    cout<<n->data;
+    n->prev->next=o;
+    o->prev=n->prev;
+    o->next=n;
+}
+return head;
+}
+//
