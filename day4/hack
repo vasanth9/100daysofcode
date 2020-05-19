@@ -78,4 +78,357 @@ head2=head2->next;
 return 1;
 }
 //
+bool has_cycle(SinglyLinkedListNode* head) {
+unordered_set<SinglyLinkedListNode*>s;
+while(head!=NULL)
+{
+    if(s.find(head)!=s.end())
+    return true;
+    else 
+    {
+        s.insert(head);
+        head=head->next;
+    }
+}
+return false;
+}//
+SinglyLinkedListNode* removeDuplicates(SinglyLinkedListNode* head) {
+SinglyLinkedListNode *x=head;
+while(x!=NULL)
+{cout<<x->data;
+    if(x->next!=NULL&&x->data==x->next->data)
+    {
+        x->next=x->next->next;//cout<<x->data;
+    }
+    else
+    {
+        x=x->next;
+    }
+}
+return head;
+}//
+int getNode(SinglyLinkedListNode* head, int positionFromTail) {
+SinglyLinkedListNode *h=head;
+int p=0;
+while(h!=NULL)
+{
+    p++;
+    h=h->next;
+}
+p=p-positionFromTail;
+int x=0;
+while(x<p-1)
+{
+    head=head->next;x++;
+}
+return head->data;
+}
+//
+bool compare_lists(SinglyLinkedListNode* head1, SinglyLinkedListNode* head2) {
+bool x=true;
+SinglyLinkedListNode *n1=head1;
+SinglyLinkedListNode *n2=head2;
+while(n1!=NULL)
+{
+    if(n2==NULL)
+    {
+        return false;
+    }
+if(n1->data!=n2->data) return false;
+
+n1=n1->next;
+n2=n2->next;
+
+}
+if(n2!=NULL)return false;
+
+
+
+
+return x;
+}
+//
+SinglyLinkedListNode* reverse(SinglyLinkedListNode* head) {
+SinglyLinkedListNode *prev=NULL;
+SinglyLinkedListNode *n=NULL;
+SinglyLinkedListNode *curr=head;
+while(curr!=NULL)
+{
+    n=curr->next;
+    curr->next=prev;
+    prev=curr;
+    curr=n;
+}
+head=prev;
+return head;
+
+}//
+void reversePrint(SinglyLinkedListNode* head) {
+SinglyLinkedListNode *prev=NULL;
+SinglyLinkedListNode *n=NULL;
+SinglyLinkedListNode *curr=head;
+while(curr!=NULL)
+{
+    n=curr->next;
+    curr->next=prev;
+    prev=curr;
+    curr=n;
+}
+head=prev;
+SinglyLinkedListNode *y=head;
+while(y!=NULL)
+{
+    cout<<y->data<<"\n";
+    y=y->next;
+}
+
+}
+//
+SinglyLinkedListNode* deleteNode(SinglyLinkedListNode* head, int position) {
+
+ SinglyLinkedListNode *p=head;
+if(position==0)
+{
+   head=p->next;
+   //free(p);
+}
+else{
+    int x=0;
+    while(x<position-1)
+    {
+x++;
+p=p->next;
+    }
+    p->next=p->next->next;
+   // free(p->next);
+}
+return head;
+}
+//
+SinglyLinkedListNode* insertNodeAtPosition(SinglyLinkedListNode* head, int data, int position) {
+SinglyLinkedListNode *n=new SinglyLinkedListNode(data);
+SinglyLinkedListNode *p=head;
+int x=0;
+if(position==0)
+{
+    n->next=head;
+    head=n;
+}
+else
+{
+    while(x<position-1)
+    {p=p->next;
+      x++;
+    }
+   n->next=p->next;
+   p->next=n;
+}
+return head;
+}
+//
+SinglyLinkedListNode* insertNodeAtHead(SinglyLinkedListNode* llist, int data) {
+SinglyLinkedListNode *o=new SinglyLinkedListNode(data);
+SinglyLinkedListNode *x=llist;
+if(x==nullptr)
+{
+    llist=o;
+}
+else {
+o->next=llist;
+llist=o;
+}
+return llist;
+}
+//
+
+void printLinkedList(SinglyLinkedListNode* head) {
+    SinglyLinkedListNode *x=head;
+    while(x!=NULL) 
+    {
+        cout<<x->data<<"\n";
+        x=x->next;
+    }
+
+}
+//
+int countingValleys(int n, string s) {
+  set<int>y;
+int x=0;
+if(s[0]=='U')x++;
+else x--;
+int r=0;
+for(int i=1;i<n;i++)
+{//cout<<u;
+
+
+    if(s[i]=='U')x++;
+    else x--;
+if(s[i]=='U'&&x==0)
+{
+    r++;
+}
+
+
+
+}
+
+
+return r;
+
+}
+//
+long arrayManipulation(int n, vector<vector<int>> queries) {
+vector<long>v(n+7,0);int x=queries.size();
+
+for(int i=0;i<x;i++)
+{int q1=queries[i][0],q2=queries[i][1],q3=queries[i][2];
+
+v[q1]+=q3;
+v[q2+1]+=-q3;
+}
+long ans=0;
+for(int i=1;i<=n;i++){v[i]+=v[i-1];
+if(ans<v[i])ans=v[i];}
+
+return ans;
+}
+//
+vector<int> matchingStrings(vector<string> strings, vector<string> queries) {
+vector<int>s;
+int n=strings.size();
+map<string,int>h;
+for(int i=0;i<n;i++)
+{
+    if(h.count(strings[i])>0)
+    {
+         h[strings[i]]++;
+    }
+    else {
+    h.insert(make_pair(strings[i], 1));
+    }
+}
+n=queries.size();
+for(int i=0;i<n;i++)
+{
+    if(h.count(queries[i])>0)
+    s.push_back(h[queries[i]]);
+    else
+    {
+        s.push_back(0);
+    }
+}
+
+
+
+return s;
+}
+//
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int a,b;
+    cin>>a>>b;
+    int arr[a];
+    for(int i=0;i<a;i++)
+    {
+    cin>>arr[i];
+    }
+    for(int i=b;i<a;i++)
+    {cout<<arr[i]<<" ";}
+    for(int i=0;i<=b-1;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+}
+//
+vector<int> dynamicArray(int n, vector<vector<int>> queries) {
+
+vector<int>res;
+vector<vector<int>>x(n);
+int ls=0;
+for(int i=0;i<n;i++)
+{
+   // cout<<"y"<<x[i].size();
+}
+int y=queries.size();
+for(int i=0;i<y;i++)
+{
+if(queries[i][0]==1)
+{
+x[(queries[i][1]^ls)%n].push_back(queries[i][2]);
+
+}
+else {
+    int u=(queries[i][1]^ls)%n;
+    ls=x[u][queries[i][2]%(x[u].size())];
+    res.push_back(ls);
+}
+}
+
+//res.push_back(7);
+return res;
+}
+//
+int hourglassSum(vector<vector<int>> arr) {
+int x=arr.size()-2,max=INT_MIN;
+for(int i=0;i<x;i++)
+{
+    for(int j=0;j<x;j++)
+    {
+        int y=arr[i][j]+arr[i][j+1]+arr[i][j+2]+arr[i+1][j+1]+arr[i+2][j]+arr[i+2][j+1]+arr[i+2][j+2];
+        cout<<i<<" "<<j<<" "<<y<<"\n";
+        if(y>max)
+        {
+            max=y;
+        }
+    }cout<<"\n";
+}
+return max;
+}
+//
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int n;
+    string s;
+    cin>>s>>n;
+   long long int y=s.length();
+    long long int x=0,l=0,z=n%y;
+   // cout<<z;
+    for(int i=0;i<y;i++)
+    {
+        if(s[i]=='a')x++;
+        if(i<z&&s[i]=='a')l++;
+    }
+    //cout<<l;
+    cout<<x*(n/y)+l;
+}
+//
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;int x[t];
+   for(int i=0;i<t;i++)
+   {
+       cin>>x[i];
+
+   }
+   int r=0;
+   for(int i=0;i<t-1;i++)
+   {
+       if(i<=t-2)
+       {
+          if( x[i]==0&&x[i+2]==0)i=i+1;
+
+       }r++;   }
+   cout<<r;
+}
+//
+
+
+
 
