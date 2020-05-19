@@ -60,3 +60,22 @@ else
 return head;
 }
 //
+int findMergeNode(SinglyLinkedListNode* head1, SinglyLinkedListNode* head2) {
+unordered_set<SinglyLinkedListNode * >s;
+while(head1!=NULL)
+{
+    s.insert(head1);head1=head1->next;
+}
+while(head2!=NULL)
+{
+    
+if(s.find(head2)!=s.end())
+{  
+    return head2->data;
+}
+head2=head2->next;
+}
+return 1;
+}
+//
+
