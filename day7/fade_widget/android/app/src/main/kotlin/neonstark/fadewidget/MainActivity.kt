@@ -1,0 +1,6 @@
+package neonstark.fadewidget
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
